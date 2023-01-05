@@ -23,6 +23,12 @@ public class MovieService {
         movieRepository.saveMovieDirectorPair(movie, director);
     }
 
+    //function to direct request to DB (Mock interview)
+
+    public String findDirectorFromMovieName(String movie) {
+        return movieRepository.findDirectorFromMovieName(movie);
+    }
+
     public Movie findMovie(String movieName){
         return movieRepository.findMovie(movieName);
     }

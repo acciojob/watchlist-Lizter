@@ -11,15 +11,22 @@ public class MovieRepository {
     private HashMap<String, Director> directorMap;
     private HashMap<String, List<String>> directorMovieMapping;
 
+    //hashmap to store movie director pair
+    private HashMap<String, String> movieDirectorMap;
+
+
+
     //Pair is : DirectorName, List of Movie Names
 
 
-    //Initialization is very important :
+
+    //Initialization (very important) :
 
     public MovieRepository(){
         this.movieMap = new HashMap<String, Movie>();
         this.directorMap = new HashMap<String, Director>();
         this.directorMovieMapping = new HashMap<String, List<String>>();
+        this.movieDirectorMap= new HashMap<String,String>();
     }
 
     public void saveMovie(Movie movie){
@@ -32,7 +39,11 @@ public class MovieRepository {
 
     public void saveMovieDirectorPair(String movie, String director){
 
-        //1. Add the movie into Datbase ---> WRONG bcz I dont have te movie object
+        //1. Add the movie into Database ---> don't have the movie object
+
+        //Put movie and director pair to Map(mock interview)
+        movieDirectorMap.put(movie,director);
+
 
         if(movieMap.containsKey(movie)&&directorMap.containsKey(director)){
 
@@ -49,6 +60,16 @@ public class MovieRepository {
 
     }
 
+    //Function to get from DB (mock interview)
+    public String findDirectorFromMovieName(String movie){
+        String director="";
+        if(movieDirectorMap.containsKey(movie))
+         director = movieDirectorMap.get(movie);
+        return director;
+    }
+
+
+
     public Movie findMovie(String movie){
         return movieMap.get(movie);
     }
@@ -59,7 +80,8 @@ public class MovieRepository {
 
     public List<String> findMoviesFromDirector(String director){
         List<String> moviesList = new ArrayList<String>();
-        if(directorMovieMapping.containsKey(director)) moviesList = directorMovieMapping.get(director);
+        if(directorMovieMapping.containsKey(director))
+            moviesList = directorMovieMapping.get(director);
         return moviesList;
     }
 
